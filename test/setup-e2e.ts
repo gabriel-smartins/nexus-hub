@@ -3,32 +3,33 @@ import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import { execSync } from 'node:child_process'
+import { PrismaPg } from '@prisma/adapter-pg'
 
-const prisma = new PrismaClient()
+export default async function () {
+  const schemaId = randomUUID()
 
-function generateUniqueDatabaseUrl(schemaId: string) {
   if (!process.env.DATABASE_URL) {
-    throw new Error('Please provide a DATABASE_URL environment variable')
+    throw new Error('DATABASE_URL not found')
   }
 
   const url = new URL(process.env.DATABASE_URL)
-
   url.searchParams.set('schema', schemaId)
 
-  return url.toString()
-}
-
-const schemaId = randomUUID()
-
-beforeAll(async () => {
-  const databaseURL = generateUniqueDatabaseUrl(schemaId)
-
+  const databaseURL = url.toString()
   process.env.DATABASE_URL = databaseURL
 
-  execSync('pnpm prisma migrate deploy')
-})
+  const prisma = new PrismaClient({
+    adapter: new PrismaPg({ connectionString: databaseURL }),
+  })
 
-afterAll(async () => {
-  await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
-  await prisma.$disconnect()
-})
+  await prisma.$executeRawUnsafe(`CREATE SCHEMA IF NOT EXISTS "${schemaId}"`)
+
+  execSync('pnpm prisma migrate deploy')
+
+  return async () => {
+    await prisma.$executeRawUnsafe(
+      `DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`,
+    )
+    await prisma.$disconnect()
+  }
+}
