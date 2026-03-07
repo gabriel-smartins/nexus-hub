@@ -30,7 +30,7 @@ export function makeQuestion(
 export class QuestionFactory {
   constructor(private prisma: PrismaService) {}
 
-  async makePrismaStudent(
+  async makePrismaQuestion(
     data: Partial<QuestionProps> = {},
   ): Promise<Question> {
     const question = makeQuestion(data)
