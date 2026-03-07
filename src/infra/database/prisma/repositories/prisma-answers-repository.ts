@@ -44,7 +44,7 @@ export class PrismaAnswerRepository implements AnswersRepository {
   ): Promise<Answer[]> {
     const answers = await this.prisma.answer.findMany({
       where: {
-        id: questionId,
+        questionId,
       },
       orderBy: {
         createdAt: 'desc',
