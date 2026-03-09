@@ -1,10 +1,13 @@
-import 'dotenv/config'
+import { config } from 'dotenv'
 
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import { execSync } from 'node:child_process'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { Pool } from 'pg'
+
+config({ path: '.env', override: true })
+config({ path: '.env.test', override: true })
 
 function generateUniqueDatabaseUrl(schemaId: string) {
   if (!process.env.DATABASE_URL) {
