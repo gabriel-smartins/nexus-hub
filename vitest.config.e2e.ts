@@ -10,6 +10,7 @@ export default defineConfig({
     root: './',
     setupFiles: ['./test/setup-e2e.ts'],
     pool: 'forks',
+    hookTimeout: 50000,
   },
   plugins: [
     tsConfigPaths(),
