@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto'
 import { execSync } from 'node:child_process'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { Pool } from 'pg'
+import { DomainEvents } from '@/core/events/domain-events'
 
 config({ path: '.env', override: true })
 config({ path: '.env.test', override: true })
@@ -35,6 +36,8 @@ beforeAll(async () => {
       DATABASE_URL: databaseURL,
     },
   })
+
+  DomainEvents.shouldRun = false
 })
 
 afterAll(async () => {
