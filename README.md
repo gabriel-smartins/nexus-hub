@@ -45,8 +45,15 @@ A aplicação mantém as regras de negócio completamente isoladas de frameworks
 - Validação de todas as entradas e variáveis de ambiente com **Zod**
 
 ### Fórum
-- Criação de perguntas vinculadas ao usuário autenticado
+- Criação, edição e exclusão de perguntas vinculadas ao usuário autenticado
 - Listagem das perguntas mais recentes com **paginação**
+- Busca de detalhes completos de uma pergunta pelo **slug**
+- Criação, edição e exclusão de respostas a perguntas
+- Listagem de respostas por pergunta
+- Marcação de uma resposta como **a melhor** pelo autor da pergunta
+- Criação, listagem e exclusão de comentários em perguntas e respostas
+- Upload de **anexos** vinculados a perguntas ou respostas
+- Sistema de **notificações** com marcação de leitura
 
 ---
 
@@ -116,8 +123,8 @@ O projeto segue **Clean Architecture** estruturada em três camadas, com depend�
 | Método | Rota                  | Descrição                                  | Auth |
 |--------|-----------------------|--------------------------------------------|------|
 | POST   | `/questions`          | Criar uma nova pergunta                    | ✅   |
-| GET    | `/questions`          | Listar perguntas recentes (paginado)       | ✅   |
-| GET    | `/questions/:slug`    | Buscar detalhes completos de uma pergunta  | ✅   |
+| GET    | `/questions`          | Listar perguntas recentes (paginado)       | ❌   |
+| GET    | `/questions/:slug`    | Buscar detalhes completos de uma pergunta  | ❌   |
 | PUT    | `/questions/:id`      | Editar uma pergunta                        | ✅   |
 | DELETE | `/questions/:id`      | Deletar uma pergunta                       | ✅   |
 
@@ -126,7 +133,7 @@ O projeto segue **Clean Architecture** estruturada em três camadas, com depend�
 | Método | Rota                                    | Descrição                            | Auth |
 |--------|-----------------------------------------|--------------------------------------|------|
 | POST   | `/questions/:questionId/answers`        | Responder a uma pergunta             | ✅   |
-| GET    | `/questions/:questionId/answers`        | Listar respostas de uma pergunta     | ✅   |
+| GET    | `/questions/:questionId/answers`        | Listar respostas de uma pergunta     | ❌   |
 | PUT    | `/answers/:id`                          | Editar uma resposta                  | ✅   |
 | DELETE | `/answers/:id`                          | Deletar uma resposta                 | ✅   |
 | PATCH  | `/answers/:answerId/choose-as-best`     | Marcar resposta como a melhor        | ✅   |
@@ -136,10 +143,10 @@ O projeto segue **Clean Architecture** estruturada em três camadas, com depend�
 | Método | Rota                                    | Descrição                                  | Auth |
 |--------|-----------------------------------------|--------------------------------------------|------|
 | POST   | `/questions/:questionId/comments`       | Comentar em uma pergunta                   | ✅   |
-| GET    | `/questions/:questionId/comments`       | Listar comentários de uma pergunta         | ✅   |
+| GET    | `/questions/:questionId/comments`       | Listar comentários de uma pergunta         | ❌   |
 | DELETE | `/questions/comments/:id`               | Deletar comentário de uma pergunta         | ✅   |
 | POST   | `/answers/:answerId/comments`           | Comentar em uma resposta                   | ✅   |
-| GET    | `/answers/:answerId/comments`           | Listar comentários de uma resposta         | ✅   |
+| GET    | `/answers/:answerId/comments`           | Listar comentários de uma resposta         | ❌   |
 | DELETE | `/answers/comments/:id`                 | Deletar comentário de uma resposta         | ✅   |
 
 ### Notificações e Anexos
