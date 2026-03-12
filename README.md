@@ -133,8 +133,8 @@ Além da divisão em camadas, o projeto aplica padrões avançados de engenharia
 | Método | Rota               | Descrição                                 | Auth |
 | ------ | ------------------ | ----------------------------------------- | ---- |
 | POST   | `/questions`       | Criar uma nova pergunta                   | ✅   |
-| GET    | `/questions`       | Listar perguntas recentes (paginado)      | ❌   |
-| GET    | `/questions/:slug` | Buscar detalhes completos de uma pergunta | ❌   |
+| GET    | `/questions`       | Listar perguntas recentes (paginado)      | ✅   |
+| GET    | `/questions/:slug` | Buscar detalhes completos de uma pergunta | ✅   |
 | PUT    | `/questions/:id`   | Editar uma pergunta                       | ✅   |
 | DELETE | `/questions/:id`   | Deletar uma pergunta                      | ✅   |
 
@@ -143,7 +143,7 @@ Além da divisão em camadas, o projeto aplica padrões avançados de engenharia
 | Método | Rota                                | Descrição                        | Auth |
 | ------ | ----------------------------------- | -------------------------------- | ---- |
 | POST   | `/questions/:questionId/answers`    | Responder a uma pergunta         | ✅   |
-| GET    | `/questions/:questionId/answers`    | Listar respostas de uma pergunta | ❌   |
+| GET    | `/questions/:questionId/answers`    | Listar respostas de uma pergunta | ✅   |
 | PUT    | `/answers/:id`                      | Editar uma resposta              | ✅   |
 | DELETE | `/answers/:id`                      | Deletar uma resposta             | ✅   |
 | PATCH  | `/answers/:answerId/choose-as-best` | Marcar resposta como a melhor    | ✅   |
@@ -153,10 +153,10 @@ Além da divisão em camadas, o projeto aplica padrões avançados de engenharia
 | Método | Rota                              | Descrição                          | Auth |
 | ------ | --------------------------------- | ---------------------------------- | ---- |
 | POST   | `/questions/:questionId/comments` | Comentar em uma pergunta           | ✅   |
-| GET    | `/questions/:questionId/comments` | Listar comentários de uma pergunta | ❌   |
+| GET    | `/questions/:questionId/comments` | Listar comentários de uma pergunta | ✅   |
 | DELETE | `/questions/comments/:id`         | Deletar comentário de uma pergunta | ✅   |
 | POST   | `/answers/:answerId/comments`     | Comentar em uma resposta           | ✅   |
-| GET    | `/answers/:answerId/comments`     | Listar comentários de uma resposta | ❌   |
+| GET    | `/answers/:answerId/comments`     | Listar comentários de uma resposta | ✅   |
 | DELETE | `/answers/comments/:id`           | Deletar comentário de uma resposta | ✅   |
 
 ### Notificações e Anexos
